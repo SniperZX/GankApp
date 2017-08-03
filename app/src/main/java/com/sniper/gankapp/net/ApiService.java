@@ -5,7 +5,9 @@ import com.sniper.gankapp.ListData;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -19,7 +21,7 @@ public interface ApiService {
 
     //http://gank.io/api/data/Android/10/1
     @GET("data/Android/{size}/{page}")
-    Observable<List<ListData>> list(@Query("size") int size, @Query("page") int page);
+    Observable<ListData> list(@Path("size") int size, @Path("page") int page);
 
 
 }

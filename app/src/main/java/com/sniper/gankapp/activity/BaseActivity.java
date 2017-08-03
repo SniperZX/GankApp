@@ -61,6 +61,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "onDestroy");
-        unregisterReceiver(mReceiver);
+
     }
 }

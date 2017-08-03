@@ -26,16 +26,17 @@ public class MainPresenter extends BasePresenter<IMainView>{
         super(context, iView);
     }
 
-    public void getData() {
+    public void getData(int page) {
 
-        RetrofitClient.getInstance(context).getService().list(100,1)
+        RetrofitClient.getInstance(context).getService().list(15,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<ListData>>() {
+                .subscribe(new Consumer<ListData>() {
                     @Override
-                    public void accept(List<ListData> listDatas) throws Exception {
+                    public void accept(ListData listDatas) throws Exception {
                         Log.e(TAG, "accept: 成功" );
+                        iView.getDataSucc(listDatas);
                         }
                 }, new Consumer<Throwable>() {
                     @Override

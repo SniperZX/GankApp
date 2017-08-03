@@ -3,9 +3,13 @@ package com.sniper.gankapp;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.sniper.gankapp.activity.BaseActivity;
 import com.sniper.gankapp.iview.IMainView;
 import com.sniper.gankapp.presenter.MainPresenter;
@@ -14,7 +18,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     protected BottomNavigationView bottomNav;
     MainPresenter mainPresenter;
-
+    protected RecyclerView recyclerView;
+    int page = 1;
+    MainBaseAdapter mainBaseAdapter;
 
     @Override
     protected int getLayoutResId() {
@@ -52,23 +58,39 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                         break;
 
                 }
-
-
                 return true;
             }
         });
-        getData();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        getData(page);
 
     }
 
-
-    public void getData(){
-
-        mainPresenter.getData();
-
+    public void getData(int page){
+        mainPresenter.getData(page);
     }
 
 
+    @Override
+    public void getDataSucc(ListData listDatas) {
+        page++;
+        if(mainBaseAdapter==null) {
+            mainBaseAdapter = new MainBaseAdapter(listDatas.getResults());
+            recyclerView.setAdapter(mainBaseAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+            mainBaseAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    getData(page);
+                }
+            }, recyclerView);
+        }else{
+            mainBaseAdapter.addData(listDatas.getResults());
+            mainBaseAdapter.loadMoreComplete();
 
-
+        }
+    }
 }
