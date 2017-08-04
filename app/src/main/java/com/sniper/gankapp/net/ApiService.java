@@ -1,14 +1,11 @@
 package com.sniper.gankapp.net;
 
 import com.sniper.gankapp.ListData;
-
-import java.util.List;
+import com.sniper.gankapp.data.Response;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by zhaohongru on 2017-08-03.
@@ -22,6 +19,17 @@ public interface ApiService {
     //http://gank.io/api/data/Android/10/1
     @GET("data/Android/{size}/{page}")
     Observable<ListData> list(@Path("size") int size, @Path("page") int page);
+/*
+    分类查询
+    http://gank.io/api/data/Android/10/1
+    http://gank.io/api/data/福利/10/1
+    http://gank.io/api/data/iOS/20/2
+    http://gank.io/api/data/all/20/2
+
+    */
+
+    @GET("data/all/{size}/{page}")
+    Observable<Response> listAll(@Path("size") int size, @Path("page") int page);
 
 
 }

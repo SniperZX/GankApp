@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.sniper.gankapp.data.Result;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/3.
@@ -18,12 +21,12 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
 
 
-    private ListData listData;
+    private  List<Result> results;
     private Context context;
 
 
-    public MainRecyclerAdapter(Context context,ListData listData) {
-        this.listData = listData;
+    public MainRecyclerAdapter(Context context, List<Result> results) {
+        this.results = results;
         this.context = context;
     }
 
@@ -38,18 +41,23 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        ListData.ResultsBean tmp = listData.getResults().get(position);
-        holder.title.setText(tmp.getDesc());
-        holder.author.setText(tmp.getWho());
-        holder.img.setImageDrawable(null);
+        Holder tmpHolder = holder;
+        Result tmp = results.get(position);
+        tmpHolder.title.setText(tmp.getDesc());
+        tmpHolder.author.setText(tmp.getWho());
+        tmpHolder.img.setImageDrawable(null);
         if(tmp.getImages()!=null&&tmp.getImages().size()!=0) {
-                Glide.with(context).load(tmp.getImages().get(0) + "?imageView2/0/w/100").dontAnimate().placeholder(null).into(holder.img);
+            tmpHolder.img.setVisibility(View.VISIBLE);
+                Glide.with(context).load(tmp.getImages().get(0) + "?imageView2/0/w/100").dontAnimate().placeholder(null).into(tmpHolder.img);
+        }else{
+            tmpHolder.img.setVisibility(View.GONE);
+
         }
     }
 
     @Override
     public int getItemCount() {
-        return listData.getResults().size();
+        return results.size();
     }
 
     class Holder extends RecyclerView.ViewHolder{
@@ -58,7 +66,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
             ImageView img;
             public Holder(View itemView) {
                 super(itemView);
-                title = (TextView) itemView.findViewById(R.id.title);
+                title = (TextView) itemView.findViewById(R.id.subtitle);
                 author = (TextView) itemView.findViewById(R.id.author);
                 img = (ImageView) itemView.findViewById(R.id.img);
             }

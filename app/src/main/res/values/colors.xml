@@ -7,4 +7,6 @@
     <color name="unchecked_color">#8c7b93</color>
     <color name="white">#FFFFFF</color>
     <color name="toolbarColor">#208c7b93</color>
+    <color name="itembackgroud">#544841</color>
+
 </resources>

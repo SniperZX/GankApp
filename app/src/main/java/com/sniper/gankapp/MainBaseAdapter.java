@@ -20,11 +20,12 @@ public class MainBaseAdapter extends BaseQuickAdapter<ListData.ResultsBean,BaseV
 
     @Override
     protected void convert(BaseViewHolder helper, ListData.ResultsBean item) {
-        helper.setText(R.id.subtitle,item.getDesc())
+        BaseViewHolder tmp = helper;
+        tmp.setText(R.id.subtitle,item.getDesc())
                 .setText(R.id.author,item.getWho());
-        helper.setImageDrawable(R.id.img,null);
+   //     tmp.setImageDrawable(R.id.img,null);
         if(item.getImages()!=null) {
-            Glide.with(mContext).load(item.getImages().get(0)+"?imageView2/0/w/100").placeholder(null).crossFade().into((ImageView) helper.getView(R.id.img));
+            Glide.with(mContext).load(item.getImages().get(0)+"?imageView2/0/w/100").placeholder(null).crossFade().into((ImageView) tmp.getView(R.id.img));
         }
     }
 }
