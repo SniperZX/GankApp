@@ -1,17 +1,20 @@
 package com.sniper.gankapp.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.sniper.gankapp.EveryDayAdapter;
 import com.sniper.gankapp.R;
+import com.sniper.gankapp.WebActivity;
 import com.sniper.gankapp.data.Result;
 import com.sniper.gankapp.iview.IEveryDayView;
 import com.sniper.gankapp.presenter.EverydayPresenter;
@@ -72,7 +75,9 @@ public class EveryDayFragment extends BaseFragment<EverydayPresenter> implements
 
     @Override
     public void initPresenter() {
-        datas = new ArrayList<>();
+        if(datas==null) {
+            datas = new ArrayList<>();
+        }
         presenter = new EverydayPresenter(getContext(), this);
         presenter.init();
     }
@@ -104,6 +109,17 @@ public class EveryDayFragment extends BaseFragment<EverydayPresenter> implements
                 getData(page);
             }
         });
+
+        mainBaseAdapter.setOnItemClick(new EveryDayAdapter.OnItemClick() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("title", datas.get(position).getDesc());
+                intent.putExtra("url",datas.get(position).getUrl());
+                getContext().startActivity(intent);
+            }
+        });
+
 
     }
 

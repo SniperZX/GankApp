@@ -28,7 +28,7 @@ public abstract class ToolBarActivity<T extends BasePresenter> extends BaseActiv
 
 
     protected boolean canBack(){
-        return false;
+        return true;
     }
 
     protected boolean isHasBack(){
@@ -42,7 +42,7 @@ public abstract class ToolBarActivity<T extends BasePresenter> extends BaseActiv
             actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(canBack());
-                actionBar.setTitle(" ");
+           //     actionBar.setTitle(" ");
             }
             toolbarClick();
         }

@@ -10,7 +10,9 @@ import android.view.View;
 
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.sniper.gankapp.activity.BaseActivity;
+import com.sniper.gankapp.fragment.CategoryFragment;
 import com.sniper.gankapp.fragment.EveryDayFragment;
+import com.sniper.gankapp.fragment.ItemFragment;
 import com.sniper.gankapp.iview.IMainView;
 import com.sniper.gankapp.presenter.MainPresenter;
 
@@ -45,7 +47,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(EveryDayFragment.newInstance("index","1"));
         viewPagerAdapter.addFragment(CategoryFragment.newInstance("category","2"));
-        viewPagerAdapter.addFragment(MeFragment.newInstance("me","3"));
+        viewPagerAdapter.addFragment(ItemFragment.newInstance(3));
         viewpager.setAdapter(viewPagerAdapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

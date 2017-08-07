@@ -37,6 +37,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         if (parent != null) {
             parent.removeView(rootView);
         }
+
         return rootView;
     }
 

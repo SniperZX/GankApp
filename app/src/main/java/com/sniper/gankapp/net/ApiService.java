@@ -25,11 +25,29 @@ public interface ApiService {
     http://gank.io/api/data/福利/10/1
     http://gank.io/api/data/iOS/20/2
     http://gank.io/api/data/all/20/2
-
+福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
     */
 
     @GET("data/all/{size}/{page}")
     Observable<Response> listAll(@Path("size") int size, @Path("page") int page);
+
+    @GET("data/福利/{size}/{page}")
+    Observable<Response> listFuli(@Path("size") int size, @Path("page") int page);
+
+    @GET("data/Android/{size}/{page}")
+    Observable<Response> listAndroid(@Path("size") int size, @Path("page") int page);
+
+    @GET("data/iOS/{size}/{page}")
+    Observable<Response> listiOS(@Path("size") int size, @Path("page") int page);
+
+    @GET("data/休息视频/{size}/{page}")
+    Observable<Response> listShiPing(@Path("size") int size, @Path("page") int page);
+
+    @GET("data/拓展资源/{size}/{page}")
+    Observable<Response> listTuoZhan(@Path("size") int size, @Path("page") int page);
+
+    @GET("data/前端/{size}/{page}")
+    Observable<Response> listQianDuan(@Path("size") int size, @Path("page") int page);
 
 
 }
